@@ -22,11 +22,38 @@
     <div>
       <label for="item">Enter a new item:</label>
       <input type="text" name="item" id="item" />
-      <button>Add item</button>
+      <button onclick="addShoppingItem()">Add item</button>
     </div>
 
     <ul></ul>
 
-    <script></script>
+    <script>
+      const shoppingList = document.querySelector("ul");
+      const itemInput = document.getElementById("item");
+      const addButton = document.getElementsByTagName("button");
+
+      function addShoppingItem() {
+        var shoppingItem = itemInput.value;
+        itemInput.value = "";
+        const listItem = document.createElement("li");
+        const itemSpan = document.createElement("span");
+        const deleteItem = document.createElement("button");
+
+        listItem.appendChild(itemSpan);
+        listItem.appendChild(deleteItem);
+
+        itemSpan.textContent = shoppingItem;
+        deleteItem.innerHTML = "Delete";
+
+        deleteItem.setAttribute("onclick", "DeleteShoppingItem(this)");
+
+        shoppingList.appendChild(listItem);
+      }
+
+      function DeleteShoppingItem(button) {
+        const listItem = button.parentElement;
+        shoppingList.removeChild(listItem);
+      }
+    </script>
   </body>
 </html>
